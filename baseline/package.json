@@ -2,7 +2,7 @@
   "name": "baseline",
   "version": "1.0.0",
   "description": "baseline WordPress theme for PorterWP by whoisAndyWhite",
-  "main": "dev/scss/default.scss",
+  "main": "assets/src/scss/app.scss",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,17 +17,13 @@
   },
   "homepage": "https://github.com/whoisandywhite/baseline#readme",
   "devDependencies": {
-    "gulp": "^4.0.2",
+    "chokidar": "^3.5.2",
+    "gulp": "^5.0.0",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-dart-sass": "^1.0.2",
     "gulp-rename": "^2.0.0",
-    "gulp-sourcemaps": "^3.0.0",
-    "gulp-uglify": "^3.0.2",
+    "gulp-terser": "^2.0.1",
     "gulp-uglifycss": "^1.1.0"
   },
-  "type": "module",
-  "dependencies": {
-    "@glidejs/glide": "^3.6.0",
-    "node-fetch": "^2.6.1"
-  }
+  "type": "module"
 }
