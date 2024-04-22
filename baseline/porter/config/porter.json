@@ -1,0 +1,61 @@
+{
+	"version" : "1.0.0",
+	"settings" : {
+		"theme-support" : {
+			"core-block-patterns" : false,
+			"link-color" : true,
+			"align-wide" : true,
+			"menus" : {},
+			"post-thumbnails" : {
+				"theme-hero" : {
+					"width" : 2250,
+					"height" : 9999
+				},
+				"theme-square" : {
+					"width" : 500,
+					"height" : 500,
+					"crop" : true
+				},
+				"theme-square-small" : {
+					"width" : 300,
+					"height" : 300,
+					"crop" : true
+				}
+			},
+			"editor-styles" : true
+		},
+		"admin" : {
+			"editor_styles" : {
+				"admin_css" : {
+					"src" : "./assets/dist/css/editor.min.css"
+				}
+			}
+		},
+		"public" : {
+			"scripts" : {
+				"main" : {
+					"src" : "./assets/dist/js/app.js",
+					"deps" : [],
+					"args" : {
+						"in_footer" : true
+					}
+				}
+			},
+			"styles" : {
+				"main" : {
+					"src" : "./assets/dist/css/app.min.css"
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+

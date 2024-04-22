@@ -1,0 +1,9 @@
+{
+	"version" : "1.0.0",
+	"option_pages" : {
+		"baseline-options" : {},
+		"key-pages" : {
+			"parent_slug" : "baseline-options"
+		}
+	}
+}

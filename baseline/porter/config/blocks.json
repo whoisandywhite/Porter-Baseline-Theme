@@ -1,0 +1,46 @@
+{
+	"version" : "1.0.0",
+	"blocks" : {
+		"settings" : {
+			"folders" : [
+				"/components",
+				"/hidden",
+				"/layouts",
+				"/parts",
+				"/query-blocks",
+				"/search",
+				"/structure"
+			]
+		},
+		"styles" : {
+			"core/heading" : {
+				"Example" : {}
+			}
+		},
+		"unregisterStyles" : {
+			"core/table" : [ "stripes", "regular" ],
+			"core/button" : [ "outline" ]
+		},
+		"patterns" : {
+			"unregisterCategories" : [
+				"core"
+			],
+			"categories" : [
+				"TMbaseline",
+				"TMbaseline Synced"
+			]
+		},
+		"unregisterBlocks" : [
+		]
+	}
+}
+
+
+
+
+
+
+
+
+
+

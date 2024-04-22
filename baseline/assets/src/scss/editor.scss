@@ -1,0 +1,19 @@
+@import "fonts";
+
+.editor-styles-wrapper {
+	@import 'default';
+
+	div.block-editor-block-list__block.acf-block-component {
+		& > div {
+			width: 100%;
+		}
+	}
+}
+.components-popover.block-editor-block-popover {
+	z-index: 150;
+}
+.is-root-container {
+	& > div {
+		max-width: 100% !important;
+	}
+}
