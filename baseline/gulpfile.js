@@ -81,23 +81,35 @@ function generateScssFromJson(done) {
 
     for (let key in json.blocks.styles) {
         for (let styleName in json.blocks.styles[key]) {
-            let scss = '';
-            let fileName = `${_.replace(key, '/', '_')}--${_.kebabCase(styleName)}.scss`;
+            let keyParts = key.split('/'); // Split the key like "core/image"
+            let blockType = _.kebabCase(keyParts[0]); // "core" or "acf"
+            let blockName = _.kebabCase(keyParts[1]); // "image", "columns", etc.
 
-            scss += `@import '../../../../../assets/src/scss/variables';\n\n`;
-            scss += `.wp-block-${_.kebabCase(key)}.is-style-${_.kebabCase(styleName)} {\n`;
-            // Define your CSS rules here; since `value` is not specified, you might want to add static or predefined values
-            scss += `    // Add your CSS rules here\n`;
-            scss += `}\n`;
+            let fileName = `${blockType}_${blockName}--${_.kebabCase(styleName)}.scss`;
+            let filePath = `porter/inc/block/styles/scss/${fileName}`;
 
-            fs.writeFile(`porter/inc/block/styles/scss/${fileName}`, scss, function(err) {
-                if (err) throw err;
-            });
+            if (!fs.existsSync(filePath)) { // Check if file does not exist
+                let scss = '';
+                scss += `@import '../../../../../assets/src/scss/variables';\n\n`;
+
+                if (blockType === 'core') {
+                    scss += `.wp-block-${blockName}.is-style-${_.kebabCase(styleName)} {\n`;
+                } else {
+                    scss += `.wp-block-${blockType}-${blockName}.is-style-${_.kebabCase(styleName)} {\n`;
+                }
+                scss += `    // Add your CSS rules here\n`;
+                scss += `}\n`;
+
+                fs.writeFile(filePath, scss, function(err) {
+                    if (err) throw err;
+                });
+            }
         }
     }
     done();
   });
 }
+
 
 
 function watchTasks() {
