@@ -6,6 +6,8 @@ import uglifycss from 'gulp-uglifycss';
 import terser from 'gulp-terser';
 import { exec } from 'child_process';
 import path from 'path';
+import fs from 'fs';
+import _ from 'lodash';
 
 function extractColors(done) {
     exec('node ./assets/build-scripts/extract-colors.js', (err, stdout, stderr) => {
@@ -71,6 +73,33 @@ function compileJS() {
     .pipe(gulp.dest('assets/dist/js', { sourcemaps: '.' }));
 }
 
+
+function generateScssFromJson(done) {
+  fs.readFile('porter/config/blocks.json', (err, data) => {
+    if (err) throw err;
+    const json = JSON.parse(data);
+
+    for (let key in json.blocks.styles) {
+        for (let styleName in json.blocks.styles[key]) {
+            let scss = '';
+            let fileName = `${_.replace(key, '/', '_')}--${_.kebabCase(styleName)}.scss`;
+
+            scss += `@import '../../../../../assets/src/scss/variables';\n\n`;
+            scss += `.wp-block-${_.kebabCase(key)}.is-style-${_.kebabCase(styleName)} {\n`;
+            // Define your CSS rules here; since `value` is not specified, you might want to add static or predefined values
+            scss += `    // Add your CSS rules here\n`;
+            scss += `}\n`;
+
+            fs.writeFile(`porter/inc/block/styles/scss/${fileName}`, scss, function(err) {
+                if (err) throw err;
+            });
+        }
+    }
+    done();
+  });
+}
+
+
 function watchTasks() {
   gulp.watch('theme.json', gulp.series(extractColors, compileSass, compileBlocks, compileBlockStyles, compileVariationStyles));
   gulp.watch('assets/src/scss/**/*.scss', compileSass);
@@ -78,6 +107,7 @@ function watchTasks() {
   gulp.watch('porter/inc/block/styles/scss/**/*.scss', compileBlockStyles);
   gulp.watch('porter/inc/block/variations/**/scss/*.scss', compileVariationStyles);
   gulp.watch('assets/src/js/**/*.js', compileJS);
+  gulp.watch('porter/config/blocks.json', generateScssFromJson); // Add this line
 }
 
 export const build = gulp.series(extractColors, gulp.parallel(compileSass, compileBlocks, compileBlockStyles, compileVariationStyles, compileJS));
