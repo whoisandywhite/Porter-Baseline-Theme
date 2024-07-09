@@ -14,7 +14,7 @@ function extractColors(done) {
     exec('node ./assets/build-scripts/extract-colors.js', (err, stdout, stderr) => {
         if (err) {
             console.error(`exec error: ${err}`);
-            return;
+            return done(err);
         }
         console.log(stdout);
         console.error(stderr);
@@ -23,30 +23,50 @@ function extractColors(done) {
 }
 
 // Function to compile SASS files into compressed CSS
-function compileSass() {
-    return gulp.src('assets/src/scss/**/*.scss', { sourcemaps: true })
+function compileSass(done) {
+    const srcDir = 'assets/src/scss';
+    if (!fs.existsSync(srcDir)) {
+        console.log(`Source directory "${srcDir}" does not exist. Skipping task.`);
+        return done();
+    }
+
+    return gulp.src(`${srcDir}/**/*.scss`, { sourcemaps: true })
         .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(autoprefixer({ cascade: false }))
         .pipe(uglifycss({ 'maxLineLen': 80, 'uglyComments': true }))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest('assets/dist/css', { sourcemaps: '.' }));
+        .pipe(gulp.dest('assets/dist/css', { sourcemaps: '.' }))
+        .on('end', done);
 }
 
 // Function to compile block-specific SASS files into CSS
-function compileBlocks() {
-    return gulp.src('porter/blocks/**/scss/*.scss', { sourcemaps: true })
+function compileBlocks(done) {
+    const srcDir = 'porter/blocks';
+    if (!fs.existsSync(srcDir)) {
+        console.log(`Source directory "${srcDir}" does not exist. Skipping task.`);
+        return done();
+    }
+
+    return gulp.src(`${srcDir}/**/scss/*.scss`, { sourcemaps: true })
         .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(autoprefixer({ cascade: false }))
         .pipe(rename(function (file) {
             file.dirname = file.dirname.replace('scss', 'css');
             file.extname = '.css';
         }))
-        .pipe(gulp.dest('porter/blocks/', { sourcemaps: '.' }));
+        .pipe(gulp.dest('porter/blocks/', { sourcemaps: '.' }))
+        .on('end', done);
 }
 
 // Function to compile SCSS files for block styles into CSS
-function compileBlockStyles() {
-    return gulp.src('porter/inc/block/styles/scss/*.scss', { sourcemaps: true })
+function compileBlockStyles(done) {
+    const srcDir = 'porter/inc/block/styles/scss';
+    if (!fs.existsSync(srcDir)) {
+        console.log(`Source directory "${srcDir}" does not exist. Skipping task.`);
+        return done();
+    }
+
+    return gulp.src(`${srcDir}/*.scss`, { sourcemaps: true })
         .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(autoprefixer({ cascade: false }))
         .pipe(uglifycss({ 'maxLineLen': 80, 'uglyComments': true }))
@@ -54,26 +74,41 @@ function compileBlockStyles() {
             path.dirname = "css";
             path.extname = '.css';
         }))
-        .pipe(gulp.dest('porter/inc/block/styles/', { sourcemaps: '.' }));
+        .pipe(gulp.dest('porter/inc/block/styles/', { sourcemaps: '.' }))
+        .on('end', done);
 }
 
 // Function to compile SCSS files for block variations into CSS
-function compileVariationStyles() {
-    return gulp.src('porter/inc/block/variations/**/scss/*.scss', { sourcemaps: true })
+function compileVariationStyles(done) {
+    const srcDir = 'porter/inc/block/variations';
+    if (!fs.existsSync(srcDir)) {
+        console.log(`Source directory "${srcDir}" does not exist. Skipping task.`);
+        return done();
+    }
+
+    return gulp.src(`${srcDir}/**/scss/*.scss`, { sourcemaps: true })
         .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(autoprefixer({ cascade: false }))
         .pipe(rename(function (file) {
             file.dirname = file.dirname.replace('scss', 'css');
             file.extname = '.css';
         }))
-        .pipe(gulp.dest('porter/inc/block/variations/', { sourcemaps: '.' }));
+        .pipe(gulp.dest(srcDir, { sourcemaps: '.' }))
+        .on('end', done);
 }
 
 // Function to minify JavaScript files
-function compileJS() {
-    return gulp.src('assets/src/js/**/*.js', { sourcemaps: true })
+function compileJS(done) {
+    const srcDir = 'assets/src/js';
+    if (!fs.existsSync(srcDir)) {
+        console.log(`Source directory "${srcDir}" does not exist. Skipping task.`);
+        return done();
+    }
+
+    return gulp.src(`${srcDir}/**/*.js`, { sourcemaps: true })
         .pipe(terser())
-        .pipe(gulp.dest('assets/dist/js', { sourcemaps: '.' }));
+        .pipe(gulp.dest('assets/dist/js', { sourcemaps: '.' }))
+        .on('end', done);
 }
 
 // Function to generate SCSS files from JSON configuration
