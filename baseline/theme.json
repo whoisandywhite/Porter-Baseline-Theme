@@ -1,7 +1,22 @@
 {
-	"version": 2,
+	"version": 3,
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
-	"settings": {},
+	"settings": {
+		"color" : {
+			"palette": [
+				{
+					"name" : "Base",
+					"slug": "base",
+					"color": "#FFFFFF"
+				},
+				{
+					"name" : "Contrast",
+					"slug": "contrast",
+					"color": "#212121"
+				}
+			]
+		}
+	},
 	"templateParts": [
 		{
 			"area": "header",
