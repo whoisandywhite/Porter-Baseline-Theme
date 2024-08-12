@@ -26,8 +26,8 @@
 				"core"
 			],
 			"categories" : [
-				"TMbaseline",
-				"TMbaseline Synced"
+				"Baseline",
+				"Baseline Synced"
 			]
 		},
 		"unregisterBlocks" : [
