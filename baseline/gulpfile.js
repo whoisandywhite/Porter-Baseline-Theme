@@ -78,6 +78,26 @@ function compileBlockStyles(done) {
         .on('end', done);
 }
 
+// Function to compile SCSS files for core block styles into CSS
+function compileCoreBlockStyles(done) {
+    const srcDir = 'porter/inc/block/core/styles/scss';
+    if (!fs.existsSync(srcDir)) {
+        console.log(`Source directory "${srcDir}" does not exist. Skipping task.`);
+        return done();
+    }
+
+    return gulp.src(`${srcDir}/*.scss`, { sourcemaps: true })
+        .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(autoprefixer({ cascade: false }))
+        .pipe(uglifycss({ 'maxLineLen': 80, 'uglyComments': true }))
+        .pipe(rename(function (path) {
+            path.dirname = "css";
+            path.extname = '.css';
+        }))
+        .pipe(gulp.dest('porter/inc/block/core/styles/', { sourcemaps: '.' }))
+        .on('end', done);
+}
+
 // Function to compile SCSS files for block variations into CSS
 function compileVariationStyles(done) {
     const srcDir = 'porter/inc/block/variations';
@@ -176,10 +196,11 @@ function createPostTypes(done) {
 
 // Watch for changes in specified files and trigger respective tasks
 function watchTasks() {
-    gulp.watch('theme.json', gulp.series(extractColors, compileSass, compileBlocks, compileBlockStyles, compileVariationStyles));
+    gulp.watch('theme.json', gulp.series(extractColors, compileSass, compileBlocks, compileBlockStyles, compileCoreBlockStyles, compileVariationStyles));
     gulp.watch('assets/src/scss/**/*.scss', compileSass);
     gulp.watch('porter/blocks/**/scss/*.scss', compileBlocks);
     gulp.watch('porter/inc/block/styles/scss/**/*.scss', compileBlockStyles);
+    gulp.watch('porter/inc/block/core/styles/scss/**/*.scss', compileCoreBlockStyles);
     gulp.watch('porter/inc/block/variations/**/scss/*.scss', compileVariationStyles);
     gulp.watch('assets/src/js/**/*.js', compileJS);
     gulp.watch('porter/config/blocks.json', generateScssFromJson);
@@ -187,7 +208,7 @@ function watchTasks() {
 }
 
 // Define the build task
-export const build = gulp.series(extractColors, gulp.parallel(compileSass, compileBlocks, compileBlockStyles, compileVariationStyles, compileJS));
+export const build = gulp.series(extractColors, gulp.parallel(compileSass, compileBlocks, compileBlockStyles, compileCoreBlockStyles, compileVariationStyles, compileJS));
 
 // Define the watch task
 export const watch = gulp.series(build, watchTasks);
