@@ -1,0 +1,16 @@
+.wp-block-button {
+    .wp-block-button__link {
+        transition: all 200ms;
+        
+        @each $color, $value in $colors {
+            &.has-#{$color}-background-color {
+                color: get-contrast-color( $value );
+
+                &:hover {
+                    background-color: var(--wp--preset--color--primary) !important;
+                    color: var(--wp--preset--color--base) !important;
+                }
+            }
+        }
+    }
+}
