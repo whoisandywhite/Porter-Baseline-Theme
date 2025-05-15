@@ -1,0 +1,25 @@
+{
+    "name": "acf/meta",
+    "title": "Meta",
+    "description": "A custom Meta block.",
+    "style": "meta-block-css",
+    "script": ["meta-block-js"],
+    "category": "baseline-structure",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderCallback": "porterBlockMeta\\pre_render"
+    },
+    "supports" : {
+        "align": true,
+        "color" : true,
+        "spacing" : {
+            "blockGap" : true,
+            "margin" : true,
+            "padding" : true
+        },
+        "typography" : {
+            "fontSize" : true
+        }
+    }
+}

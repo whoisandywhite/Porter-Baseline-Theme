@@ -1,0 +1,16 @@
+@use '../../../../../assets/src/scss/variables';
+
+.wp-block-acf-filters.is-style-horizontal {
+    @media (variables.$breakpoint-md) {
+        .porter-filters,
+        .porter-filters__form,
+        .porter-filters .inner-content,
+        .porter-filters .porter-filter-list {
+            flex-direction: row;
+            align-items: center;
+        }
+        .porter-filter-controls {
+            margin-block-start: 0;
+        }
+    }
+}

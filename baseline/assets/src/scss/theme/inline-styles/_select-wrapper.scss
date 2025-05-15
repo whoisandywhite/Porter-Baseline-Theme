@@ -1,0 +1,72 @@
+.select-wrapper {
+    position: relative;
+    font-size: var(--wp--preset--font-size--small);
+	min-width: min( 100%, 10rem);
+	max-width: 30em;
+	padding: 0.5em;
+	padding-left: 1em;
+	background-color: var(--wp--preset--color--base);
+	min-height: 3em;
+
+	select {
+		appearance: none;
+		margin: 0;
+		color: var(--wp--preset--color--contrast);
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+		width: 100%;
+		font-family: inherit;
+		font-size: inherit;
+		cursor: pointer;
+		line-height: inherit;
+		position: relative;
+		z-index: 1;
+		outline: none;
+		padding: 0;
+		padding-right: 3em;
+		height: 2em;
+
+		// Remove dropdown arrow in IE10 & IE11
+		// @link https://www.filamentgroup.com/lab/select-css.html
+		&::-ms-expand {
+			display: none;
+		}
+
+		&:focus {
+			border-color: var(--wp--preset--color--pink);
+		}
+
+		&:hover {
+			& + .select-wrapper__caret {
+				background-color: var(--wp--preset--color--contrast);
+			}
+		}
+	}
+
+	.select-wrapper__caret {
+		position: absolute;
+		right: 0.5em;
+		top: calc( 50% - 1px);
+		transform: translateY(-50%);
+		width: 2em;
+		height: 2em;
+		background-color: var(--wp--preset--color--base);
+		z-index: 0;
+
+		svg {
+			object-fit: contain;
+			width: 60%;
+			height: auto;
+			object-position: center;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+
+			path {
+				fill: var(--wp--preset--color--base);
+			}
+		}
+	}
+}

@@ -1,0 +1,127 @@
+@use "../../variables";
+
+.wp-block-columns {
+    align-items: normal !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap !important;
+
+    &.are-vertically-aligned-top {
+        align-items: flex-start;
+    }
+
+    &.are-vertically-aligned-center {
+        align-items: center;
+    }
+
+    &.are-vertically-aligned-bottom {
+        align-items: flex-end;
+    }
+
+    &.is-not-stacked-on-mobile {
+        flex-wrap: nowrap !important;
+
+        >.wp-block-column {
+            flex-basis: 0;
+            flex-grow: 1;
+
+            &[style*=flex-basis] {
+                flex-grow: 0;
+            }
+        }
+    }
+
+    &:where(.has-background) {
+        padding: 1.25em 2.375em;
+    }
+
+    &:where {
+        margin-bottom: 1.75em;
+    }
+
+    @media (variables.$breakpoint-md) {
+        flex-wrap: nowrap !important;
+
+        &:not(.is-not-stacked-on-mobile)>.wp-block-column {
+            flex-basis: 0;
+            flex-grow: 1;
+
+            &[style*=flex-basis] {
+                flex-grow: 0;
+            }
+        }
+    }
+
+    @media (variables.$breakpoint-md-max) {
+        &:not(.is-not-stacked-on-mobile)>.wp-block-column {
+            flex-basis: 100% !important;
+        }
+    }
+}
+
+.wp-block-column {
+    flex-grow: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+
+    &.is-vertically-aligned-top {
+        align-self: flex-start;
+    }
+
+    &.is-vertically-aligned-center {
+        align-self: center;
+    }
+
+    &.is-vertically-aligned-bottom {
+        align-self: flex-end;
+    }
+
+    &.is-vertically-aligned-stretch {
+        align-self: stretch;
+    }
+
+    &.is-vertically-aligned-top,
+    &.is-vertically-aligned-center,
+    &.is-vertically-aligned-bottom {
+        width: 100%;
+    }
+}
+
+
+
+// Center contents
+.wp-block-columns.is-style-center-contents {
+    justify-content: center !important;
+
+    .wp-block-column {
+        text-align: center !important;
+        display: flex;
+        justify-content: center;
+        flex: initial !important;
+        width: auto !important;
+
+        &:first-child {
+            @media (variables.$breakpoint-md) {
+                text-align: right !important;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+
+        &:last-child {
+            @media (variables.$breakpoint-md) {
+                text-align: left !important;
+                display: flex;
+                justify-content: flex-start;
+            }
+        }
+    }
+}
+
+// md row reverse
+.wp-block-columns.is-style-lg-row-reverse {
+    @media (variables.$breakpoint-md) {
+        flex-direction: row-reverse;
+    }
+}

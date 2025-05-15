@@ -7,14 +7,15 @@
 				"/hidden",
 				"/layouts",
 				"/parts",
-				"/query-blocks",
-				"/search",
 				"/structure"
 			]
 		},
 		"styles" : {
-			"core/heading" : {
-				"Example" : {}
+			"acf/filters" : {
+				"Horizontal" : {}
+			},
+			"core/columns" : {
+				"LG Row Reverse" : {}
 			}
 		},
 		"unregisterStyles" : {
@@ -30,7 +31,12 @@
 				"Baseline Synced"
 			]
 		},
-		"unregisterBlocks" : [
+		"unregisterBlocks" : [],
+		"dequeueStyles" : [
+			"wp-block-navigation",
+			"wp-block-navigation-link",
+			"wp-block-columns",
+			"wp-block-column"
 		]
 	}
 }

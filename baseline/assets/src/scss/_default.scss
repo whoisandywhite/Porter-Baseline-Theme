@@ -1,6 +1,6 @@
 // Variables
-@import 'variables';
+@use 'variables';
 // Utilities
-@import 'utilities/all';
+@use 'utilities/all';
 // Custom Theme Styls
-@import 'theme/all';
+@use 'theme/all' as themeall;

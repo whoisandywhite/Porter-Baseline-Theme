@@ -1,5 +1,5 @@
 code {
-  background: var(--wp--preset--color--primary);
+  background: var(--wp--preset--color--contrast);
   border-radius: .4rem;
   font-size: 86%;
   margin: 0 .2rem;
@@ -8,8 +8,8 @@ code {
 }
 
 pre {
-  background: var(--wp--preset--color--primary);
-  border-left: .3rem solid var(--wp--preset--color--primary);
+  background: var(--wp--preset--color--contrast);
+  border-left: .3rem solid var(--wp--preset--color--contrast);
   overflow-y: hidden;
 
   & > code {

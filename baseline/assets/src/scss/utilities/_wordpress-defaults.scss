@@ -1,23 +1,4 @@
-
-.aligncenter {
-	text-align: center;
-}
-.alignright {
-	text-align: right;
-}
-
-
-
-
-// Fix collapse width
-@media ($breakpoint-max) 
-{	
-	body {		
-		.wp-block-columns {
-		    flex-wrap: wrap!important;
-		}
-		.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column {
-		    flex-basis: 100%!important;
-		}
-	}
+.is-position-sticky {
+	position: sticky;
+	transition: top 300ms;
 }

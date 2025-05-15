@@ -1,0 +1,10 @@
+.relevanssi-live-search-instructions {
+    & + div {
+        position: relative;
+
+        .relevanssi-live-search-results {
+            top: 0 !important;
+            left: 0 !important;
+        }
+    }
+}

@@ -1,30 +1,31 @@
 {
-	"version" : "1.0.0",
+	"version" : "1.0.1",
+	"premium" : {
+		"filters" : true
+	},
 	"settings" : {
 		"theme-support" : {
 			"core-block-patterns" : false,
 			"link-color" : true,
 			"align-wide" : true,
-			"menus" : {},
-			"post-thumbnails" : {
-				"theme-hero" : {
-					"width" : 2250,
-					"height" : 9999
-				},
-				"theme-square" : {
-					"width" : 500,
-					"height" : 500,
-					"crop" : true
-				},
-				"theme-square-small" : {
-					"width" : 300,
-					"height" : 300,
-					"crop" : true
-				}
-			},
+			"menus" : false,
+			"post-formats" : false,
+			"post-thumbnails" : {},
 			"editor-styles" : true
 		},
 		"admin" : {
+			"editor_scripts" : {
+				"font-awesome" : {
+					"src" : "//kit.fontawesome.com/df54d593b8.js",
+					"deps" : [],
+					"args" : {
+						"in_footer" : true
+					},
+					"data" : {
+						"crossorigin" : "anonymous"
+					}
+				}
+			},
 			"editor_styles" : {
 				"admin_css" : {
 					"src" : "./assets/dist/css/editor.min.css"
@@ -38,6 +39,30 @@
 					"deps" : [],
 					"args" : {
 						"in_footer" : true
+					}
+				},
+				"core-query-no-results" : {
+					"src" : "./assets/dist/js/core-query--no-results.js",
+					"deps" : [],
+					"args" : {
+						"in_footer" : true
+					}
+				},
+				"smooth-anchor-links" : {
+					"src" : "./assets/dist/js/smooth-anchor-links.js",
+					"deps" : [],
+					"args" : {
+						"in_footer" : true
+					}
+				},
+				"font-awesome" : {
+					"src" : "//kit.fontawesome.com/df54d593b8.js",
+					"deps" : [],
+					"args" : {
+						"in_footer" : true
+					},
+					"data" : {
+						"crossorigin" : "anonymous"
 					}
 				}
 			},

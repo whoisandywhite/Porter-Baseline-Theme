@@ -1,6 +1,7 @@
 import gulp from 'gulp';
 import autoprefixer from 'gulp-autoprefixer';
-import sass from 'gulp-dart-sass';
+import gulpSass from 'gulp-sass';
+import dartSass  from 'sass';
 import rename from 'gulp-rename';
 import uglifycss from 'gulp-uglifycss';
 import terser from 'gulp-terser';
@@ -8,6 +9,8 @@ import { exec } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
+
+const sass = gulpSass(dartSass);
 
 // Function to extract colors from scripts
 function extractColors(done) {
@@ -31,7 +34,7 @@ function compileSass(done) {
     }
 
     return gulp.src(`${srcDir}/**/*.scss`, { sourcemaps: true })
-        .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(autoprefixer({ cascade: false }))
         .pipe(uglifycss({ 'maxLineLen': 80, 'uglyComments': true }))
         .pipe(rename({ suffix: '.min' }))
@@ -48,7 +51,7 @@ function compileBlocks(done) {
     }
 
     return gulp.src(`${srcDir}/**/scss/*.scss`, { sourcemaps: true })
-        .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(autoprefixer({ cascade: false }))
         .pipe(rename(function (file) {
             file.dirname = file.dirname.replace('scss', 'css');
@@ -67,7 +70,7 @@ function compileBlockStyles(done) {
     }
 
     return gulp.src(`${srcDir}/*.scss`, { sourcemaps: true })
-        .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(autoprefixer({ cascade: false }))
         .pipe(uglifycss({ 'maxLineLen': 80, 'uglyComments': true }))
         .pipe(rename(function (path) {
@@ -87,7 +90,7 @@ function compileCoreBlockStyles(done) {
     }
 
     return gulp.src(`${srcDir}/*.scss`, { sourcemaps: true })
-        .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(autoprefixer({ cascade: false }))
         .pipe(uglifycss({ 'maxLineLen': 80, 'uglyComments': true }))
         .pipe(rename(function (path) {
@@ -107,7 +110,7 @@ function compileVariationStyles(done) {
     }
 
     return gulp.src(`${srcDir}/**/scss/*.scss`, { sourcemaps: true })
-        .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(autoprefixer({ cascade: false }))
         .pipe(rename(function (file) {
             file.dirname = file.dirname.replace('scss', 'css');
@@ -148,7 +151,7 @@ function generateScssFromJson(done) {
 
                 if (!fs.existsSync(filePath)) { // Check if file does not exist
                     let scss = '';
-                    scss += `@import '../../../../../assets/src/scss/variables';\n\n`;
+                    scss += `@use '../../../../../assets/src/scss/variables';\n\n`;
 
                     if (blockType === 'core') {
                         scss += `.wp-block-${blockName}.is-style-${_.kebabCase(styleName)} {\n`;

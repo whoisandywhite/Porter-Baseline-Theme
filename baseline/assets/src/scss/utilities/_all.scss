@@ -1,11 +1,11 @@
 // Modules
 // ––––––––––––––––––––––––––––––––––––––––––––––––––
-@import 'reset';
-@import 'functions';
+@use 'reset';
+@use 'functions';
 
-@import 'accessibility';
-@import 'code';
-@import 'display';
-@import 'link';
-@import 'spacing';
-@import 'wordpress-defaults';
+@use 'accessibility';
+@use 'code';
+@use 'display';
+@use 'link';
+@use 'spacing';
+@use 'wordpress-defaults';

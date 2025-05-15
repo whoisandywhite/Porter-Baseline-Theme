@@ -1,10 +1,12 @@
-@import 'global';
+@use 'plugins/relevanssi/live-search';
+@use 'plugins/yoast/breadcrumbs';
 
-@import 'blocks/general';
-@import 'blocks/core-button-styles';
-@import 'blocks/custom-inline-classes';
+@use 'blocks/general';
+@use 'blocks/core-button-styles';
+@use 'blocks/core-columns';
+@use 'blocks/core-post-featured-image';
 
-@import 'parts/header';
-@import 'parts/footer';
+@use 'inline-styles/select-wrapper';
 
-@import 'templates/index';
+@use 'parts/header';
+@use 'parts/footer';

@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll(".wp-block-query").forEach((e=>{e.querySelector(".wp-block-post-template")||e.classList.add("wp-block-query--no-results")}))}));//# sourceMappingURL=core-query--no-results.js.map

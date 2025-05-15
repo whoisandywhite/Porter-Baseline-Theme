@@ -1,5 +1,5 @@
 <?php 
-class baseline_Restrict_by_user_role
+class codh_Restrict_by_user_role
 {
 	/**
 	 * Prepare the class
@@ -83,4 +83,4 @@ class baseline_Restrict_by_user_role
 
 
 }
-new baseline_Restrict_by_user_role();
+new codh_Restrict_by_user_role();

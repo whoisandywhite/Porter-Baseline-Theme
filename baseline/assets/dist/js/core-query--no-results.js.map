@@ -1,0 +1,1 @@
+{"version":3,"file":"core-query--no-results.js","names":["document","addEventListener","querySelectorAll","forEach","queryBlock","querySelector","classList","add"],"sources":["core-query--no-results.js"],"mappings":"AAAAA,SAASC,iBAAiB,oBAAoB,KAElBD,SAASE,iBAAiB,mBAElCC,SAASC,IAEGA,EAAWC,cAAc,4BAI7CD,EAAWE,UAAUC,IAAI,6BAC7B,GACF","ignoreList":[]}

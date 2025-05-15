@@ -1,7 +1,10 @@
+// Variables
+@use 'variables';
+
 .hide,
 .d-none,
 .hidden {
-	display: none;
+	display: none !important;
 }
 .visually-hidden,
 .visually-hidden-focusable:not(:focus):not(:focus-within) {
@@ -17,28 +20,75 @@
 }
 
 .d-flex {
-  display: flex;
+  display: flex !important;
 }
 .d-block {
-  display: block;
+  display: block !important;
 }
 .d-inline {
-  display: inline;
+  display: inline !important;
 }
 .d-inline-block {
-  display: inline-block;
+  display: inline-block !important;
 }
+.d-xs-none:not(.wp-block) {
+  @media (variables.$breakpoint-md-max) {
+    display: none !important;
+  }
+}
+.d-md-none:not(.wp-block) {
+  @media (min-width: variables.$breakpoint-md) and (max-width: variables.$breakpoint-lg-max) {
+    display: none !important;
+  }
+}
+.d-lg-none:not(.wp-block) {
+  @media (variables.$breakpoint-lg) {
+    display: none !important;
+  }
+}
+
 
 .position-relative {
-  position: relative;
+  position: relative !important;
 }
 .position-absolute {
-  position: absolute;
+  position: absolute !important;
 }
 .position-sticky {
-  position: sticky;
+  position: sticky !important;
+}
+.position-static {
+  position: static !important;
+}
+.overflow-hidden {
+  overflow: hidden !important;
 }
 
-.overflow-hidden {
-  overflow: hidden;
+.img-fluid {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+
+.md-align-end {
+  @media screen and ( variables.$breakpoint-md ) {
+      & > *,
+      .wp-block-navigation {
+          justify-content: flex-end;
+      }
+      & > p {
+        text-align: right !important;
+      }
+  }
+}
+.lg-align-end {
+  @media screen and ( variables.$breakpoint-lg ) {
+      & > *,
+      .wp-block-navigation {
+          justify-content: flex-end;
+      }
+      & > p {
+        text-align: right !important;
+      }
+  }
 }

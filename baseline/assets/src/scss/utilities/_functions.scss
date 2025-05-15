@@ -1,4 +1,10 @@
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+@use "../variables";
+
 @use "sass:math";
+@use "sass:color";
 
 /**
  * Clamps, aka truncates, multi-line text. Note that non-webkit browsers will
@@ -12,7 +18,7 @@
  * }
  */
 @mixin line-clamp($font-size, $line-height, $lines-to-show) {
-  @if unitless($line-height) ==false {
+  @if math.is-unitless($line-height) ==false {
     $line-height: create-unitless-line-height($font-size, $line-height);
   }
 
@@ -32,9 +38,9 @@
 }
 
 @function encodecolor($string) {
-  @if type-of($string) == "color" and str-index(#{$string}, "#") ==1 {
-    $hex: str-slice(ie-hex-str($string), 4);
-    $string: unquote("#{$hex}");
+  @if meta.type-of($string) == "color" and string.index(#{$string}, "#") ==1 {
+    $hex: string.slice(color.ie-hex-str($string), 4);
+    $string: string.unquote("#{$hex}");
 
     @return "%23" + $string;
   }
@@ -51,11 +57,11 @@
 // @param {String} $replace ('') - New value
 // @return {String} - Updated string
 @function str-replace($string, $search, $replace: "") {
-  $index: str-index($string, $search);
+  $index: string.index($string, $search);
 
   @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace +
-      str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    @return string.slice($string, 1, $index - 1) + $replace +
+      str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
   }
 
   @return $string;
@@ -66,11 +72,11 @@
 // Requires the use of quotes around data URIs.
 
 @function escape-svg($string) {
-  @if str-index($string, "data:image/svg+xml") {
-    @each $char, $encoded in $escaped-characters {
+  @if string.index($string, "data:image/svg+xml") {
+    @each $char, $encoded in variables.$escaped-characters {
       // Do not escape the url brackets
-      @if str-index($string, "url(") ==1 {
-        $string: url("#{str-replace(str-slice($string, 6, -3), $char, $encoded)}");
+      @if string.index($string, "url(") ==1 {
+        $string: url("#{str-replace(string.slice($string, 6, -3), $char, $encoded)}");
       } @else {
         $string: str-replace($string, $char, $encoded);
       }
@@ -85,7 +91,7 @@
   $color-luminance: luminance($color);
 
   // Define contrast colors
-  $dark-color: #181818;
+  $dark-color: #10202F;
   $light-color: #ffffff;
 
   // Calculate luminance of contrast colors
@@ -110,15 +116,17 @@
 
 // Function to calculate relative luminance
 @function luminance($color) {
+
+  // FUTURE PROOF for when Dart Sass supports color.channel()
   $rgb: (
-    "r": calc(red($color) / 255),
-    "g": calc(green($color) / 255),
-    "b": calc(blue($color) / 255)
+    "r": calc(color.channel($color, "red", $space: rgb) / 255),
+    "g": calc(color.channel($color, "green", $space: rgb) / 255),
+    "b": calc(color.channel($color, "blue", $space: rgb) / 255)
   );
 
   @each $key, $value in $rgb {
     $value: if($value < 0.04045, calc($value / 12.92), math.pow(math.div($value + 0.055, 1.055), 2.4));
-    $rgb: map-merge(
+    $rgb: map.merge(
       $rgb,
       (
         $key: $value
@@ -126,5 +134,5 @@
     );
   }
 
-  @return (map-get($rgb, "r") * 0.2126)+ (map-get($rgb, "g") * 0.7152)+ (map-get($rgb, "b") * 0.0722);
+  @return (map.get($rgb, "r") * 0.2126)+ (map.get($rgb, "g") * 0.7152)+ (map.get($rgb, "b") * 0.0722);
 }

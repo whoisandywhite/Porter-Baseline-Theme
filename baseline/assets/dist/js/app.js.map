@@ -1,0 +1,1 @@
+{"version":3,"file":"app.js","names":["window","addEventListener","event","scrollY","document","body","classList","add","remove"],"sources":["app.js"],"mappings":"AACAA,OAAOC,iBAAiB,UAAU,SAASC,GAEnBF,OAAOG,QACT,IACpBC,SAASC,KAAKC,UAAUC,IAAI,iBAE5BH,SAASC,KAAKC,UAAUE,OAAO,gBAEjC","ignoreList":[]}

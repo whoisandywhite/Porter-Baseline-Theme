@@ -1,7 +1,15 @@
-@import "colors";
+@use "sass:map";
+@use "colors";
 
-$breakpoint: "min-width: 767px";
-$breakpoint-max: "max-width: 767px";
+$breakpoint-md-val: 768px;
+$breakpoint-md-max-val: 767px;
+$breakpoint-lg-val: 1024px;
+$breakpoint-lg-max-val: 1023px;
+
+$breakpoint-md: "min-width: #{$breakpoint-md-val}";
+$breakpoint-md-max: "max-width: #{$breakpoint-md-max-val}";
+$breakpoint-lg: "min-width: #{$breakpoint-lg-val}";
+$breakpoint-lg-max: "max-width: #{$breakpoint-lg-max-val}";
 
 $escaped-characters: (
   ("<", "%3c"),
@@ -16,10 +24,8 @@ $escaped-characters: (
 $min-contrast-ratio: 4.5;
 
 // Customize the light and dark text colors for use in our color contrast function.
-$color-contrast-dark: map-get( $colors, "contrast");
-$color-contrast-light: map-get( $colors, "base");
+$color-contrast-dark: map.get( colors.$colors, "contrast");
+$color-contrast-light: map.get( colors.$colors, "base");
 
 // standardised transition
 $transition: all 250ms;
-
-
