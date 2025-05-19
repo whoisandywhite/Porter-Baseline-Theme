@@ -5,11 +5,11 @@
 * Functions, hooks, filters and actions which will be used
 * only in this project.
 *
-* @package codh
+* @package baseline
 * @version 1.0.0
 */
 
-class codh_Theme
+class baseline_Theme
 {
 
 	/**
@@ -29,7 +29,7 @@ class codh_Theme
 	{
 		// Language Loading
 		add_action( 'init', [$this, 'load_theme_textdomain'] );
-		// Add codh creator link - do not remove
+		// Add baseline creator link - do not remove
 		add_action( 'wp_footer', [ $this, 'add_developer_link' ] );
 	}
 
@@ -47,11 +47,11 @@ class codh_Theme
 	 * Sets up multilangage utilities.
 	 */
 	public function load_theme_textdomain() {
-		load_theme_textdomain( 'codh', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'baseline', get_template_directory() . '/languages' );
 	}
 }
 
-new codh_Theme();
+new baseline_Theme();
 
 
 

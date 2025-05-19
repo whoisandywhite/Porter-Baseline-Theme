@@ -16,7 +16,7 @@
 		"admin" : {
 			"editor_scripts" : {
 				"font-awesome" : {
-					"src" : "//kit.fontawesome.com/df54d593b8.js",
+					"src" : "//kit.fontawesome.com/FA_KIT_ID.js",
 					"deps" : [],
 					"args" : {
 						"in_footer" : true
@@ -56,7 +56,7 @@
 					}
 				},
 				"font-awesome" : {
-					"src" : "//kit.fontawesome.com/df54d593b8.js",
+					"src" : "//kit.fontawesome.com/FA_KIT_ID.js",
 					"deps" : [],
 					"args" : {
 						"in_footer" : true

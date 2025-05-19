@@ -1,5 +1,5 @@
 <?php 
-class codh_filterHeadingExample {
+class baseline_filterHeadingExample {
 
     private $blockName = "core/heading";
     private $className = "example"; // optional
@@ -35,4 +35,4 @@ class codh_filterHeadingExample {
 }
 
 // Instantiate the class
-// new codh_filterHeadingExample();
+// new baseline_filterHeadingExample();

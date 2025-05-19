@@ -1,5 +1,5 @@
 <?php
-class codh_filterQueryBlockExample {
+class baseline_filterQueryBlockExample {
 
     private $className = 'example';
     private $blockName = 'core/query';
@@ -80,4 +80,4 @@ class codh_filterQueryBlockExample {
 }
 
 // Instantiate the class
-// new codh_filterQueryBlockExample();
+// new baseline_filterQueryBlockExample();

@@ -100,7 +100,7 @@
 				{
 					"fluid": {
 						"max": "20px",
-						"min": "16px"
+						"min": "15px"
 					},
 					"name": "Body",
 					"size": "20px",

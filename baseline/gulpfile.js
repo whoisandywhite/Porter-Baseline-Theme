@@ -81,11 +81,8 @@ export function compileBlockStyles(done) {
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(autoprefixer({ cascade: false }))
     .pipe(uglifycss({ maxLineLen: 80, uglyComments: true }))
-    .pipe(renameTransform(file => {
-      file.dirname = 'css';
-      file.extname = '.css';
-    }))
-    .pipe(gulp.dest('porter/inc/block/styles/', { sourcemaps: '.' }))
+    // output CSS one level up in 'css' folder
+    .pipe(gulp.dest(path.join(srcDir, '../css'), { sourcemaps: '.' }))
     .on('end', done);
 }
 
@@ -98,11 +95,8 @@ export function compileCoreBlockStyles(done) {
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(autoprefixer({ cascade: false }))
     .pipe(uglifycss({ maxLineLen: 80, uglyComments: true }))
-    .pipe(renameTransform(file => {
-      file.dirname = 'css';
-      file.extname = '.css';
-    }))
-    .pipe(gulp.dest('porter/inc/block/core/styles/', { sourcemaps: '.' }))
+    // output CSS one level up in 'css' folder
+    .pipe(gulp.dest(path.join(srcDir, '../css'), { sourcemaps: '.' }))
     .on('end', done);
 }
 
@@ -135,7 +129,7 @@ export function compileJS(done) {
 
 // Generate SCSS from JSON
 export function generateScssFromJson(done) {
-  const json = JSON.parse(fs.readFileSync('porter/config/blocks.json'));
+  const json = JSON.parse(fs.readFileSync('porter/config/blocks.json'));  
   for (const key of Object.keys(json.blocks.styles)) {
     for (const styleName of Object.keys(json.blocks.styles[key])) {
       const [type, name] = key.split('/');
@@ -144,7 +138,7 @@ export function generateScssFromJson(done) {
       const filename = `${blockType}_${blockName}--${_.kebabCase(styleName)}.scss`;
       const filepath = `porter/inc/block/styles/scss/${filename}`;
       if (!fs.existsSync(filepath)) {
-        let content = `@import '../../../../../assets/src/scss/variables';\n\n`;
+        let content = `@use '../../../../../assets/src/scss/variables';\n\n`;
         content += blockType === 'core'
           ? `.wp-block-${blockName}.is-style-${_.kebabCase(styleName)} {\n`  
           : `.wp-block-${blockType}-${blockName}.is-style-${_.kebabCase(styleName)} {\n`;
@@ -164,7 +158,7 @@ export function createPostTypes(done) {
     const svg = path.join(dir, 'icon.svg');
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
-      const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">` +
+      const svgContent = `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 640 512\">` +
         `<!-- icon -->` +
         `</svg>`;
       fs.writeFileSync(svg, svgContent);
